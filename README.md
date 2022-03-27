@@ -2,4 +2,4 @@
 
 Simples gerador/pré-visualizador de Border Radius
 
-![Clique aqui para acessar!](https://css-border-radius-generator-previewer.vercel.app/)
+[Clique aqui para acessar!](https://css-border-radius-generator-previewer.vercel.app/)
