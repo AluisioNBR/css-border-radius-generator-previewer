@@ -1,0 +1,59 @@
+$app-background-color: #333;
+$box-background: #b4b4b4;
+
+.container {
+    padding: 0 2rem;
+    background-color: $app-background-color;
+}
+
+.main {
+    min-height: 100vh;
+    padding: 4rem 0;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+#boxContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.sideBox{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+.pointModifier{
+    width: 3rem;
+    height: 3rem;
+
+    font-size: 1.2rem;
+}
+
+#box{
+    background: $box-background;
+    width: 5rem;
+    height: 5rem;
+    padding: 5rem;
+}
+
+#cssCopyAreaValue, #cssCopyAreaButton{
+    font-size: 1rem;
+    padding: .8rem;
+}
+
+#cssCopyAreaValue{
+    width: 18rem;
+}
+
+#cssCopyAreaButton{
+    background-color: #c00;
+    color: #fdfdfd;
+}
