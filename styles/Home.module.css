@@ -37,6 +37,13 @@
   background: #b4b4b4;
 }
 
+#extrasContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+}
+
 .dimensionLabel {
   color: #fdfdfd;
 }
@@ -50,13 +57,27 @@
   padding: 0.5rem;
 }
 
+#cssCopyArea {
+  display: flex;
+}
+@media (max-width: 720px) {
+  #cssCopyArea {
+    flex-direction: column;
+  }
+}
+
 #cssCopyAreaValue {
   width: 18rem;
 }
 
 #cssCopyAreaButton {
+  cursor: pointer;
   background-color: #c00;
   color: #fdfdfd;
+}
+
+#cssCopyAreaButton:active {
+  background-color: #00c;
 }
 
 /*# sourceMappingURL=Home.module.css.map */

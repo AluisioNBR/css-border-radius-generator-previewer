@@ -143,10 +143,11 @@ function BoxContainer({
 function CssCopyArea({ value }){
   function copyContent(value){
     navigator.clipboard.writeText(value)
+    alert('Border Radius copiado!!')
   }
 
   return(
-    <div>
+    <div id={styles.cssCopyArea}>
       <input
         id={styles.cssCopyAreaValue}
         type='text'
@@ -217,7 +218,7 @@ function ExtrasContainer({
   cssCopyAreaValue
 }){
   return(
-    <div>
+    <div id={styles.extrasContainer}>
       <BoxSize
         boxWidth={boxWidth}
         boxHeight={boxHeight}
