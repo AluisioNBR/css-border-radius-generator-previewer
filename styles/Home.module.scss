@@ -1,5 +1,6 @@
 $app-background-color: #333;
 $box-background: #b4b4b4;
+$white: #fdfdfd;
 
 .container {
     padding: 0 2rem;
@@ -39,14 +40,19 @@ $box-background: #b4b4b4;
 
 #box{
     background: $box-background;
-    width: 5rem;
-    height: 5rem;
-    padding: 5rem;
 }
 
-#cssCopyAreaValue, #cssCopyAreaButton{
+.dimensionLabel{
+    color: $white;
+}
+
+#cssCopyAreaValue, #cssCopyAreaButton, .dimensionInput{
     font-size: 1rem;
     padding: .8rem;
+}
+
+.dimensionInput{
+    padding: .5rem;
 }
 
 #cssCopyAreaValue{
@@ -55,5 +61,5 @@ $box-background: #b4b4b4;
 
 #cssCopyAreaButton{
     background-color: #c00;
-    color: #fdfdfd;
+    color: $white;
 }

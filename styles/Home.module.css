@@ -35,14 +35,19 @@
 
 #box {
   background: #b4b4b4;
-  width: 5rem;
-  height: 5rem;
-  padding: 5rem;
 }
 
-#cssCopyAreaValue, #cssCopyAreaButton {
+.dimensionLabel {
+  color: #fdfdfd;
+}
+
+#cssCopyAreaValue, #cssCopyAreaButton, .dimensionInput {
   font-size: 1rem;
   padding: 0.8rem;
+}
+
+.dimensionInput {
+  padding: 0.5rem;
 }
 
 #cssCopyAreaValue {
