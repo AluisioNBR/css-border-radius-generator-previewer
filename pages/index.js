@@ -1,17 +1,17 @@
 import Head from 'next/head'
-// import Image from 'next/image'
 import styles from '../styles/Home.module.css'
-import { useState } from 'react'
+import { useState, createContext, useContext } from 'react'
+
+const BoxContext = createContext()
 
 function Box({
-  boxWidth,
-  boxHeight,
-  setCssCopyAreaValue,
   topLeftCorner,
   downLeftCorner,
   topRightCorner,
   downRightCorner
 }){
+
+  const [boxWidth, boxHeight, setCssCopyAreaValue] = useContext(BoxContext)
 
   function equalizeValues(value){
     topLeftCorner = value
@@ -101,11 +101,7 @@ function SideBox({
   )
 }
 
-function BoxContainer({
-  boxWidth,
-  boxHeight,
-  setCssCopyAreaValue
-}){
+function BoxContainer(){
   const [topRightCorner, setTopRightCorner] = useState('')
   const [topLeftCorner, setTopLeftCorner] = useState('')
   const [downRightCorner, setDownRightCorner] = useState('')
@@ -121,9 +117,6 @@ function BoxContainer({
       />
       
       <Box
-        boxWidth={boxWidth}
-        boxHeight={boxHeight}
-        setCssCopyAreaValue={setCssCopyAreaValue}
         topLeftCorner={topLeftCorner}
         downLeftCorner={downLeftCorner}
         topRightCorner={topRightCorner}
@@ -140,7 +133,11 @@ function BoxContainer({
   )
 }
 
-function CssCopyArea({ value }){
+const CssCopyAreaContext = createContext()
+
+function CssCopyArea(){
+  const value = useContext(CssCopyAreaContext)
+  
   function copyContent(value){
     navigator.clipboard.writeText(value)
     alert('Border Radius copiado!!')
@@ -187,12 +184,11 @@ function Dimension({
   )
 }
 
-function BoxSize({
-  boxWidth,
-  boxHeight,
-  setBoxWidth,
-  setBoxHeight
-}){
+const BoxSizeContext = createContext()
+
+function BoxSize(){
+  const [boxWidth, setBoxWidth, boxHeight, setBoxHeight] = useContext(BoxSizeContext)
+
   return(
     <div>
       <Dimension
@@ -210,25 +206,12 @@ function BoxSize({
   )
 }
 
-function ExtrasContainer({
-  boxWidth,
-  boxHeight,
-  setBoxWidth,
-  setBoxHeight,
-  cssCopyAreaValue
-}){
+function ExtrasContainer(){
   return(
     <div id={styles.extrasContainer}>
-      <BoxSize
-        boxWidth={boxWidth}
-        boxHeight={boxHeight}
-        setBoxWidth={setBoxWidth}
-        setBoxHeight={setBoxHeight}
-      />
+      <BoxSize/>
 
-      <CssCopyArea
-        value={cssCopyAreaValue}
-      />
+      <CssCopyArea/>
     </div>
   )
 }
@@ -247,19 +230,15 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <BoxContainer
-          boxWidth={boxWidth}
-          boxHeight={boxHeight}
-          setCssCopyAreaValue={setCssCopyAreaValue}
-        />
+        <BoxContext.Provider value={[boxWidth, boxHeight, setCssCopyAreaValue]}>
+          <BoxContainer/>
+        </BoxContext.Provider>
 
-        <ExtrasContainer
-          boxWidth={boxWidth}
-          boxHeight={boxHeight}
-          setBoxWidth={setBoxWidth}
-          setBoxHeight={setBoxHeight}
-          cssCopyAreaValue={cssCopyAreaValue}
-        />
+        <BoxSizeContext.Provider value={[boxWidth, setBoxWidth, boxHeight, setBoxHeight]}>
+          <CssCopyAreaContext.Provider value={cssCopyAreaValue}>
+            <ExtrasContainer/>
+          </CssCopyAreaContext.Provider>
+        </BoxSizeContext.Provider>
       </main>
     </div>
   )
