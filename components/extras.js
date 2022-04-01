@@ -1,5 +1,4 @@
 import styles from '../styles/Home.module.css'
-import { useContext } from 'react'
 
 function CssCopyArea({ value }){
   function copyContent(value){
