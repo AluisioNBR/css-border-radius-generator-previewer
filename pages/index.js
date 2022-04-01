@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import { useState, createContext, useContext } from 'react'
+import { ExtrasContainer } from '../components/extras'
 
 const BoxContext = createContext()
 
@@ -15,16 +16,16 @@ function Box({
 
   function equalizeValues(value){
     topLeftCorner = value
-    topRightCorner = value
-    downRightCorner = value
-    downLeftCorner = value
+    topRightCorner = ''
+    downRightCorner = ''
+    downLeftCorner = ''
   }
 
   function adjustToCssRules(valueOne, valueTwo){
     topLeftCorner = valueOne
     topRightCorner = valueTwo
-    downRightCorner = valueOne
-    downLeftCorner = valueTwo
+    downRightCorner = ''
+    downLeftCorner = ''
   }
 
   function checkHowManyValuesHaveChanged(){
@@ -133,89 +134,6 @@ function BoxContainer(){
   )
 }
 
-const CssCopyAreaContext = createContext()
-
-function CssCopyArea(){
-  const value = useContext(CssCopyAreaContext)
-  
-  function copyContent(value){
-    navigator.clipboard.writeText(value)
-    alert('Border Radius copiado!!')
-  }
-
-  return(
-    <div id={styles.cssCopyArea}>
-      <input
-        id={styles.cssCopyAreaValue}
-        type='text'
-        value={value}
-        readOnly
-      />
-
-      <button
-        id={styles.cssCopyAreaButton}
-        onClick={() => copyContent(value)}
-      >
-        Copiar
-      </button>
-    </div>
-  )
-}
-
-function Dimension({
-  name,
-  value,
-  setDimension
-}){
-  return(
-    <div>
-      <label className={styles.dimensionLabel} htmlFor={name}>
-        {name}:
-      </label>
-      <br/>
-      <input
-        type='text'
-        name={name}
-        className={styles.dimensionInput}
-        value={value}
-        onChange={(event) => setDimension(event.target.value)}
-      />
-    </div>
-  )
-}
-
-const BoxSizeContext = createContext()
-
-function BoxSize(){
-  const [boxWidth, setBoxWidth, boxHeight, setBoxHeight] = useContext(BoxSizeContext)
-
-  return(
-    <div>
-      <Dimension
-        name='Width'
-        value={boxWidth}
-        setDimension={setBoxWidth}
-      />
-
-      <Dimension
-        name='Height'
-        value={boxHeight}
-        setDimension={setBoxHeight}
-      />
-    </div>
-  )
-}
-
-function ExtrasContainer(){
-  return(
-    <div id={styles.extrasContainer}>
-      <BoxSize/>
-
-      <CssCopyArea/>
-    </div>
-  )
-}
-
 export default function Home() {
   const [cssCopyAreaValue, setCssCopyAreaValue] = useState('border-radius: 0;')
   const [boxWidth, setBoxWidth] = useState('128px')
@@ -234,11 +152,13 @@ export default function Home() {
           <BoxContainer/>
         </BoxContext.Provider>
 
-        <BoxSizeContext.Provider value={[boxWidth, setBoxWidth, boxHeight, setBoxHeight]}>
-          <CssCopyAreaContext.Provider value={cssCopyAreaValue}>
-            <ExtrasContainer/>
-          </CssCopyAreaContext.Provider>
-        </BoxSizeContext.Provider>
+        <ExtrasContainer
+          cssCopyAreaValue={cssCopyAreaValue}
+          boxWidth={boxWidth}
+          setBoxWidth={setBoxWidth}
+          boxHeight={boxHeight}
+          setBoxHeight={setBoxHeight}
+        />
       </main>
     </div>
   )
